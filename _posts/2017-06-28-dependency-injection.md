@@ -265,7 +265,7 @@ The most convenient way to achieve DI/IoC is to use constructor injection
 
 A framework to create dependencies and inject them automatically when required. It automatically creates objects based on request and inject them when required. DI Container helps us to manage dependencies with in the application in a simple and easy way.
 
-### IoC/DI Framework
+### IoC/DI Frameworks:
 * Autofac
 
     1. Register the instance
@@ -286,4 +286,4 @@ A framework to create dependencies and inject them automatically when required. 
 
 * StructureMap
 * Unity
-* Ninject
+* NInject
