@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Inversion of Control and Dependency Injection"
-date: 2017-06-28 09:15:00 +05:30
+date: 2017-06-28 06:00:00 +05:30
 tags: [patterns]
 comments: true
 ---
