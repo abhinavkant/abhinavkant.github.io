@@ -40,7 +40,7 @@ public class Client
     public void StartService()
     {
         Console.WriteLine("Service Started");
-        _service.Serve();
+        _service.StartService();
         //To Do: Some Stuff
     }
 }
@@ -86,7 +86,7 @@ public class Client
         _service = service;
     }
 
-    public void Start()
+    public void StartService()
     {
         Console.WriteLine("Service Started");
         this._service.Serve();
@@ -99,7 +99,7 @@ class Program
     static void Main(string[] args)
     {
         var c = new Client(new Service());
-        c.Start();
+        c.StartService();
     }
 }
 ```
@@ -138,7 +138,7 @@ public class Client
         this._service = service;
     }
 
-    public void Start()
+    public void StartService()
     {
         Console.WriteLine("Service Started");
         this._service.Serve();
@@ -150,7 +150,7 @@ class Program
     static void Main(string[] args)
     {
         var client = new Client(new Service());
-        client.Start();
+        client.StartService();
 
         Console.ReadKey();
     }
@@ -185,7 +185,7 @@ public class Client
         }
     }
 
-    public void Start()
+    public void StartService()
     {
         Console.WriteLine("Service Started");
         this._service.Serve();
@@ -199,7 +199,7 @@ class Program
     {
         Client client = new Client();
         client.Service = new Service();
-        client.Start();
+        client.StartService();
 
         Console.ReadKey();
     }
@@ -230,20 +230,10 @@ public interface IClient
 
 public class Client
 {
-    private IService _service;
-
-    public IService Service
-    {
-        set
-        {
-            this._service = value;
-        }
-    }
-
-    public void Start()
+    public void StartService(IService service)
     {
         Console.WriteLine("Service Started");
-        this._service.Serve();
+        service.Serve();
         //To Do: Some Stuff
     }
 }
@@ -252,8 +242,7 @@ class Program
     static void Main(string[] args)
     {
         Client client = new Client();
-        client.Service = new Service();
-        client.Start();
+        client.StartService(new Service());
 
         Console.ReadKey();
     }
@@ -270,7 +259,7 @@ A framework to create dependencies and inject them automatically when required. 
 
     1. Register the instance
 
-    ```csharp 
+    ```csharp
     var builder = new ContainerBuilder();
     builder.RegisterType<Service>().As<IService>();
     builder.RegisterType<Client>().As<IClient>();
