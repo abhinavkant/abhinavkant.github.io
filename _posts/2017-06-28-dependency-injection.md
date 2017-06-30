@@ -17,6 +17,8 @@ So the idea is to create a **loosely coupled** code. Design the code such that
 * code maintainability without adding complexity.
 * increase testability.
 
+> Loose couping enables you to write code which is [open for extensibility, but closed for modification]. This is called the **OPEN/CLOSED PRINCIPLE**.
+
 Example of a tight coupled code
 
 ```csharp
