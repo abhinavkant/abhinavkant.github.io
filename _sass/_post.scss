@@ -64,3 +64,20 @@
 .post-link {
   display: inline;
 }
+
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border:1px solid #ffffff;
+}
+
+th{
+    padding: 5px;
+    border:1px solid #ffffff;
+}
+
+td{
+    // font-weight: normal;
+    padding: 5px;
+    border:1px solid #ffffff;
+}
