@@ -4,6 +4,7 @@ title: "Repository & Unit of Work Pattern"
 date: 2017-07-01
 tags: [patterns]
 ---
+
 ## Repository Pattern
 
 > Mediates between the domain and data mapping layers using a collection-like interface for accessing domain objects.
@@ -51,6 +52,7 @@ AuthorRepository : Repository<Author>, IAuthorRepository
 * Decouple your application from persistence framework.
 * Promotes testability.
 
+## Unit of Work
 Reiterating, Unit of Work is referred to as a single transaction that involves multiple operations of insert/update/delete and so on kinds.
 
 ### How should a UnitOfWork code look like:
