@@ -5,6 +5,8 @@ date: 2017-06-28 06:00:00 +05:30
 tags: [patterns]
 comments: true
 ---
+> In 1995, when the Gang of Four wrote Design Patterns,2 this was already common knowledge: *Program to an interface, not an implementation.*
+
 > Inversion of control is a common characteristic of frameworks, so saying that these lightweight containers are special because they use inversion of control is like saying my car is special because it has wheels.
 
 > Inversion of Control is too generic a term, and thus people find it confusing. As a result with a lot of discussion with various IoC advocates we settled on the name Dependency Injection.
@@ -111,6 +113,13 @@ Now lets see what have we achieved:
 * Code is more flexible, we can switch the implementation of IService when Client class is initialized a
 * Client does not have to change.
 * Code is testable.
+
+Benefits gained from loose coupling:
+* Late binding
+* Extensibility
+* Parallel development
+* Maintainability
+* Testability
 
 ## Ways to achieve IoC/DI:
 
