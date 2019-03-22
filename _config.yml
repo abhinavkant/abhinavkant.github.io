@@ -13,3 +13,7 @@ github_username:  abhinavkant
 # Build settings
 markdown: kramdown
 permalink: pretty
+
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-slate
