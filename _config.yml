@@ -4,7 +4,7 @@ description: >
 about: > 
   nothing
 master_repo: false
-url: "abhinavkant.com"
+url: "https://abhinavkant.github.io"
 markdown: kramdown
 highlighter: rouge
 
