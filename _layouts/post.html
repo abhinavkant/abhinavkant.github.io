@@ -1,39 +1,35 @@
 ---
 layout: default
-comments: true
 ---
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+<h2 style="margin-bottom: -20px;">{{ page.title }}</h2>
+<p class="post-date">{{ page.date | date_to_string }}</p>
 
-  <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
-    <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%B %d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
-  </header>
+<div class="post">
+{{ content }}
+</div>
 
-  <div class="post-content" itemprop="articleBody">
-    {{ content }}
-  </div>
+<a class="twitter-share-button"
+   href="https://twitter.com/intent/tweet?text={{page.title}}"
+   data-hashtags="{{ page.tags | join: ', ' }}"
+   data-via="{{ site.owner.twitter_username }}"
+   data-size="large">Tweet</a>
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
 
-  {% if page.comments %}
-  <div id="disqus_thread"></div>
-  <script>
-
-  /**
-  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-  /*
-  var disqus_config = function () {
-  this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-  this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
   };
-  */
-  (function() { // DON'T EDIT BELOW THIS LINE
-  var d = document, s = d.createElement('script');
-  s.src = 'https://abhinavkant.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-  })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  {% endif %}
 
-</article>
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+
+{% if site.disqus_shortname %}
+{% include disqus_comments.html %}
+{% endif %}

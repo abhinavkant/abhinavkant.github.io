@@ -5,8 +5,6 @@ date: 2017-07-01
 tags: [patterns]
 ---
 
-## Repository Pattern
-
 > Mediates between the domain and data mapping layers using a collection-like interface for accessing domain objects.
 > ref: https://martinfowler.com/eaaCatalog/repository.html
 
