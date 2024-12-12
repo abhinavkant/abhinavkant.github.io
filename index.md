@@ -1,1 +1,1 @@
-I learn, I write , I apply and I remember.
+I learn, I read, I write , I apply and I remember.
