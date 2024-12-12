@@ -1,42 +1,33 @@
-title: "Kant's Blog"
-author: "Abhinav Kant"
-description: "Some short description of your blog can go here." # This will show up in places like twitter, linkedin, etc, if you share your sites url as a post.
+title: Kant's Blog
+email: abhinav.kant@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+  I read, I learn, I write and I remember :-)
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://abhinav.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: abhinav_kant
+github_username: abhinavkant
 
-# Email / Social media user names used by the minima theme:
-# All of these are optional and can be removed or commented out
-email: "abhinav.kant@mail.com"
-twitter_username: "abhinav_kant"
-github_username: "abhinavkant"
-linkedin_username: "abhinavkant"
-#facebook_username: username
-#flickr_username: username
-#instagram_username: username
-#pinterest_username: username
-#youtube_username: username
-#googleplus_username: +username
-
-#########################################################################################
-######### Nothing below needs to be changed (unless you know what you're doing) #########
-#########################################################################################
-theme: "minima"
-
-rss: rss
-
-kramdown:
-  syntax_highlighter_opts:
-    disable: true
-
+# Build settings
+theme: minima
 plugins:
   - jekyll-feed
   - jekyll-sitemap
-
-titles_from_headings:
-  strip_title: true
-  collections: true
-
-defaults:
-  - scope:
-      path: ""
-      type: post
-    values:
-      tags: Other
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
+# exclude:
+#   - .sass-cache/
+#   - .jekyll-cache/
+#   - gemfiles/
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules/
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
