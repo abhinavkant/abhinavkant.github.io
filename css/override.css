@@ -22,7 +22,7 @@ hr {
   padding: 0 2.2em;
   width: 50%;
   position: relative;
-  color: inherit !important;
+  /* color: inherit !important; */
 }
 
 .post_navi .nav_prev {
@@ -46,5 +46,5 @@ hr {
   top: 50%;
   transform: translateY(-50%);
   font-size: 2.5em;
-  opacity: 0.3;
+  /* opacity: 0.3; */
 }
