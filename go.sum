@@ -1,2 +1,14 @@
+github.com/Junyi-99/hugo-theme-anubis2 v1.3.5 h1:+ht3ivmZTc7sp1wWcauMSrNegtDLExYGQ3U+YJgoba8=
+github.com/Junyi-99/hugo-theme-anubis2 v1.3.5/go.mod h1:xKACdZaRlk2G1sGz5USbO32xFmL5smbU4UcYEbllgyI=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20241109160605-3e5362100777 h1:SWL2QAy3Y42ZToWKeVb9utQaaa8BpHxtCFUf0LDjma8=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20241109160605-3e5362100777/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
+github.com/barklan/hugo-dead-simple v1.75.64 h1:feQoxsWu9xop0Rub2X2teYhJe/jMTOeyNduS9KzfJCk=
+github.com/barklan/hugo-dead-simple v1.75.64/go.mod h1:Ql5njM3SwZWMqWD1bt6UQoebKHIuRt37HeEkiWMUxXo=
+github.com/hanwenguo/hugo-theme-nostyleplease v0.0.0-20241206231156-54b49193a0c5 h1:wc4SikAoh4sFuuW/ZeqyKwLCDVpqNAGyE1+V6JLq9fk=
+github.com/hanwenguo/hugo-theme-nostyleplease v0.0.0-20241206231156-54b49193a0c5/go.mod h1:7MmCdJmDLYnE8hMLIX2lUpRayUHR/U81+HS1l0Q3TnU=
 github.com/hugo-sid/hugo-blog-awesome v1.18.0 h1:9+eWINeZCeQ/LL6P0cxRDAxvbfnsJlydkgCSNs+DGlY=
 github.com/hugo-sid/hugo-blog-awesome v1.18.0/go.mod h1:3XVERF66wgQpTsruOajS5Swr+uvyTzov1acafNaqm1E=
+github.com/janraasch/hugo-bearblog v0.0.0-20240409062118-efc24bc5e95f h1:h1TtpK1NUIhPu13M22+hrGIL5ARSv2fLJ1/QuuqEHhI=
+github.com/janraasch/hugo-bearblog v0.0.0-20240409062118-efc24bc5e95f/go.mod h1:qVJ3S3qhkRf6smf5f8vveeV/QX3ui8poHckF6Ykt9AU=
+github.com/mrmierzejewski/hugo-theme-console v0.0.0-20241205185154-69afe3ccd2a4 h1:ONaB1saT92DZRmkFYSoPWxWNhyLlgoNc+q3guYNfrlA=
+github.com/mrmierzejewski/hugo-theme-console v0.0.0-20241205185154-69afe3ccd2a4/go.mod h1:N65e0/XqC5/oKjv5TpwNFi88vAgMDUZfnGU4sf7KRkQ=

@@ -1,0 +1,16 @@
+baseURL: https://abhinavkant.github.io/
+languageCode: en-us
+title: KANT Blog
+module:
+  imports:
+    - path: github.com/hugo-sid/hugo-blog-awesome
+params:
+  socialIcons:
+    - name: github
+      url: https://github.com/abhinavkant
+    - name: twitter
+      url: https://twitter.com
+    - name: Rss
+      url: index.xml
+  goToTop: true
+  favicon: assets/favicon.ico
