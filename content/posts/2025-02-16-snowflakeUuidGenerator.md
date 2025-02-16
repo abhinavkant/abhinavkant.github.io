@@ -129,7 +129,7 @@ class Program
 
 ### Expected Results
 
-C#: ~1M - 5M IDs/sec (faster due to better thread management and compiled execution)
+C#: ~1M - 5M IDs/sec (fast due to better thread management and compiled execution)
 
 ## Use Cases
 
