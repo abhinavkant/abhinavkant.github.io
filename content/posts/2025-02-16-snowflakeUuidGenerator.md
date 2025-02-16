@@ -14,20 +14,20 @@ A Snowflake Unique ID Generator is a distributed, high-performance unique identi
 
 A Snowflake ID is typically a 64-bit integer composed of multiple segments that encode metadata. The structure is as follows:
 
-**Timestamp (41 bits)**: Represents the timestamp in milliseconds since a custom epoch.
-**Datacenter ID (5 bits)**: Identifies the datacenter or region.
-**Worker ID (5 bits)**: Identifies the machine or node within the datacenter.
-**Sequence Number (12 bits)**: A counter that increments per ID generation within the same millisecond.
-**Sign Bit (1 bit)**: Reserved for future use (typically unused and set to 0).
+* **Timestamp (41 bits)**: Represents the timestamp in milliseconds since a custom epoch.
+* **Datacenter ID (5 bits)**: Identifies the datacenter or region.
+* **Worker ID (5 bits)**: Identifies the machine or node within the datacenter.
+* **Sequence Number (12 bits)**: A counter that increments per ID generation within the same millisecond.
+* **Sign Bit (1 bit)**: Reserved for future use (typically unused and set to 0).
 
 This design allows Snowflake IDs to be unique, time-ordered, and generated in a distributed fashion without coordination.
 
 ## Benefits of Snowflake ID
 
-**Uniqueness**: Guarantees uniqueness without relying on centralized databases.
-**Scalability**: Supports high throughput ID generation in distributed systems.
-**Sortability**: IDs are time-ordered, which improves database indexing and querying performance.
-**Efficiency**: Generates IDs with minimal latency (~1 microsecond per ID in most implementations).
+* **Uniqueness**: Guarantees uniqueness without relying on centralized databases.
+* **Scalability**: Supports high throughput ID generation in distributed systems.
+* **Sortability**: IDs are time-ordered, which improves database indexing and querying performance.
+* **Efficiency**: Generates IDs with minimal latency (~1 microsecond per ID in most implementations).
 
 ## Example Implementation
 
@@ -105,10 +105,10 @@ class Program
 
 ## Use Cases
 
-**Distributed Databases**: Generating unique primary keys for NoSQL and relational databases.
-**Messaging Systems**: Assigning unique message IDs in distributed messaging applications.
-**Microservices**: Ensuring unique request and transaction identifiers across services.
-**Logging & Analytics**: Generating IDs for logs, traces, and events.
+* **Distributed Databases**: Generating unique primary keys for NoSQL and relational databases.
+* **Messaging Systems**: Assigning unique message IDs in distributed messaging applications.
+* **Microservices**: Ensuring unique request and transaction identifiers across services.
+* **Logging & Analytics**: Generating IDs for logs, traces, and events.
 
 ## Conclusion
 
