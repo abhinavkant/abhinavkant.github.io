@@ -103,6 +103,34 @@ class Program
 }
 ```
 
+## Performance Benchmarking
+
+```cs
+using System;
+using System.Diagnostics;
+
+class Program
+{
+    static void Main()
+    {
+        var generator = new SnowflakeIDGenerator(1, 1);
+        int numIds = 1000000; // Number of IDs to generate
+        Stopwatch stopwatch = Stopwatch.StartNew();
+        for (int i = 0; i < numIds; i++)
+        {
+            generator.GenerateId();
+        }
+        stopwatch.Stop();
+        Console.WriteLine($"Generated {numIds} IDs in {stopwatch.Elapsed.TotalSeconds:F4} seconds");
+        Console.WriteLine($"Throughput: {numIds / stopwatch.Elapsed.TotalSeconds:F2} IDs/sec");
+    }
+}
+```
+
+### Expected Results
+
+C#: ~1M - 5M IDs/sec (faster due to better thread management and compiled execution)
+
 ## Use Cases
 
 * **Distributed Databases**: Generating unique primary keys for NoSQL and relational databases.
