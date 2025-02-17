@@ -188,3 +188,5 @@ Console.WriteLine($"⚡ Speed: {totalGenerated / (stopwatch.ElapsedMilliseconds 
 ## Conclusion
 
 The Snowflake Unique ID Generator is a powerful approach for distributed ID generation, ensuring uniqueness, scalability, and efficiency. By leveraging time-based sorting and decentralization, it enables high-performance applications that require large-scale, unique ID creation.
+
+[**source code**](https://github.com/abhinavkant/IdGenerator)
