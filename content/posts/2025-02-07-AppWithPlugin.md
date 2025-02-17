@@ -1,6 +1,6 @@
 +++
 date = '2025-02-07'
-draft = true
+draft = false
 title = '.NET Application with Plugin Support'
 +++
 
