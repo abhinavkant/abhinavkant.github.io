@@ -173,10 +173,10 @@ Console.WriteLine($"⚡ Speed: {totalGenerated / (stopwatch.ElapsedMilliseconds 
 ### Expected Results
 
 📌 Test Summary:
-✅ Total IDs Generated: 50000000
-❌ Duplicates Found: 0
-⏱️ Execution Time: 21469 ms
-⚡ Speed: 2328939.400996786 IDs/sec
+-✅ Total IDs Generated: 50000000
+-❌ Duplicates Found: 0
+-⏱️ Execution Time: 21469 ms
+-⚡ Speed: 2328939.400996786 IDs/sec
 
 ## Use Cases
 
