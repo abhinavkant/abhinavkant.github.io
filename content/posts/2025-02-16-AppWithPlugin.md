@@ -1,11 +1,11 @@
 +++
-date = '2025-02-16'
+date = '2025-02-07'
 draft = true
 title = '.NET Application with Plugin Support'
 +++
 
 
-# Creating a .NET Application with Plugin Support
+# .NET Application with Plugin Support
 
 In modern software development, extensibility is a key feature that allows applications to grow and adapt over time. One of the best ways to achieve this in .NET is through plugin support. This article will guide you through the process of building a .NET application that supports plugins using Dependency Injection and Assembly Loading.
 
