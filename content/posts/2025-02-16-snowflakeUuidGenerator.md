@@ -34,49 +34,55 @@ This design allows Snowflake IDs to be unique, time-ordered, and generated in a 
 A simple Python implementation of the Snowflake ID Generator:
 
 ```cs
-using System;
-using System.Threading;
-
-public class SnowflakeIDGenerator
+public class SnowflakeIdGenerator
 {
-    private static readonly object _lock = new object();
-    private const long Epoch = 1640995200000L;
-    private const int DatacenterIdBits = 5;
-    private const int WorkerIdBits = 5;
+    private const long Twepoch = 1288834974657L; // Custom epoch timestamp
+    private const int MachineIdBits = 5;
+    private const int DataCenterIdBits = 5;
     private const int SequenceBits = 12;
-    private const long MaxDatacenterId = (1L << DatacenterIdBits) - 1;
-    private const long MaxWorkerId = (1L << WorkerIdBits) - 1;
-    private const long MaxSequence = (1L << SequenceBits) - 1;
-    private readonly long _datacenterId;
-    private readonly long _workerId;
+
+    private const long MaxMachineId = -1L ^ (-1L << MachineIdBits);
+    private const long MaxDataCenterId = -1L ^ (-1L << DataCenterIdBits);
+    private const long MaxSequence = -1L ^ (-1L << SequenceBits);
+
+    private const int MachineIdShift = SequenceBits;
+    private const int DataCenterIdShift = SequenceBits + MachineIdBits;
+    private const int TimestampLeftShift = SequenceBits + MachineIdBits + DataCenterIdBits;
+
+    private readonly long _machineId;
+    private readonly long _dataCenterId;
     private long _lastTimestamp = -1L;
     private long _sequence = 0L;
 
-    public SnowflakeIDGenerator(long datacenterId, long workerId)
-    {
-        if (datacenterId > MaxDatacenterId || datacenterId < 0)
-            throw new ArgumentException("Datacenter ID out of range");
-        if (workerId > MaxWorkerId || workerId < 0)
-            throw new ArgumentException("Worker ID out of range");
+    private readonly object _lock = new();
 
-        _datacenterId = datacenterId;
-        _workerId = workerId;
+    public SnowflakeIdGenerator(long machineId, long dataCenterId)
+    {
+        if (machineId > MaxMachineId || machineId < 0)
+            throw new ArgumentException($"Machine ID must be between 0 and {MaxMachineId}");
+
+        if (dataCenterId > MaxDataCenterId || dataCenterId < 0)
+            throw new ArgumentException($"Datacenter ID must be between 0 and {MaxDataCenterId}");
+
+        _machineId = machineId;
+        _dataCenterId = dataCenterId;
     }
 
-    private long CurrentTimestamp() => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-
-    public long GenerateId()
+    public long NextId()
     {
         lock (_lock)
         {
-            long timestamp = CurrentTimestamp();
+            long timestamp = GetCurrentTimestamp();
+
+            if (timestamp < _lastTimestamp)
+            {
+                throw new InvalidOperationException("Clock moved backwards. Refusing to generate ID.");
+            }
+
             if (timestamp == _lastTimestamp)
             {
                 _sequence = (_sequence + 1) & MaxSequence;
-                if (_sequence == 0)
-                {
-                    while ((timestamp = CurrentTimestamp()) <= _lastTimestamp) { }
-                }
+                if (_sequence == 0) timestamp = WaitForNextMillis(_lastTimestamp);
             }
             else
             {
@@ -84,11 +90,27 @@ public class SnowflakeIDGenerator
             }
 
             _lastTimestamp = timestamp;
-            return ((timestamp - Epoch) << (DatacenterIdBits + WorkerIdBits + SequenceBits)) |
-                   (_datacenterId << (WorkerIdBits + SequenceBits)) |
-                   (_workerId << SequenceBits) |
-                   _sequence;
+
+            return ((timestamp - Twepoch) << TimestampLeftShift)
+                   | (_dataCenterId << DataCenterIdShift)
+                   | (_machineId << MachineIdShift)
+                   | _sequence;
         }
+    }
+
+    private long GetCurrentTimestamp()
+    {
+        return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+    }
+
+    private long WaitForNextMillis(long lastTimestamp)
+    {
+        long timestamp = GetCurrentTimestamp();
+        while (timestamp <= lastTimestamp)
+        {
+            timestamp = GetCurrentTimestamp();
+        }
+        return timestamp;
     }
 }
 
@@ -97,8 +119,9 @@ class Program
 {
     static void Main()
     {
-        var generator = new SnowflakeIDGenerator(1, 1);
-        Console.WriteLine(generator.GenerateId());
+        var generator = new SnowflakeIdGenerator(machineId: 1, dataCenterId: 1);
+        long uniqueId = generator.NextId();
+        Console.WriteLine($"Generated Snowflake ID: {uniqueId}");
     }
 }
 ```
@@ -106,30 +129,54 @@ class Program
 ## Performance Benchmarking
 
 ```cs
-using System;
+using System.Collections.Concurrent;
 using System.Diagnostics;
+using IdGenerator;
 
-class Program
+int threadCount = 50;  // Number of parallel threads
+int idCountPerThread = 1000000; // Number of IDs per thread
+var generator = new SnowflakeIdGenerator(machineId: 1, dataCenterId: 1);
+
+var idSet = new ConcurrentDictionary<long, bool>(); // Store IDs to check for duplicates
+int duplicateCount = 0;
+var stopwatch = Stopwatch.StartNew();
+
+Parallel.For(0, threadCount, _ =>
 {
-    static void Main()
+    for (int i = 0; i < idCountPerThread; i++)
     {
-        var generator = new SnowflakeIDGenerator(1, 1);
-        int numIds = 1000000; // Number of IDs to generate
-        Stopwatch stopwatch = Stopwatch.StartNew();
-        for (int i = 0; i < numIds; i++)
+        long id = generator.NextId();
+
+        // If ID already exists, it's a collision
+        if (!idSet.TryAdd(id, true))
         {
-            generator.GenerateId();
+            Console.WriteLine($"⚠️ Duplicate ID detected: {id}");
+            lock (idSet)
+            {
+                duplicateCount++;
+            }
         }
-        stopwatch.Stop();
-        Console.WriteLine($"Generated {numIds} IDs in {stopwatch.Elapsed.TotalSeconds:F4} seconds");
-        Console.WriteLine($"Throughput: {numIds / stopwatch.Elapsed.TotalSeconds:F2} IDs/sec");
     }
-}
+});
+
+stopwatch.Stop();
+long totalGenerated = threadCount * idCountPerThread;
+
+Console.WriteLine($"\n📌 Test Summary:");
+Console.WriteLine($"✅ Total IDs Generated: {totalGenerated}");
+Console.WriteLine($"❌ Duplicates Found: {duplicateCount}");
+Console.WriteLine($"⏱️ Execution Time: {stopwatch.ElapsedMilliseconds} ms");
+Console.WriteLine($"⚡ Speed: {totalGenerated / (stopwatch.ElapsedMilliseconds / 1000.0)} IDs/sec");
+
 ```
 
 ### Expected Results
 
-C#: ~1M - 5M IDs/sec (fast due to better thread management and compiled execution)
+📌 Test Summary:
+✅ Total IDs Generated: 50000000
+❌ Duplicates Found: 0
+⏱️ Execution Time: 21469 ms
+⚡ Speed: 2328939.400996786 IDs/sec
 
 ## Use Cases
 
