@@ -1,10 +1,8 @@
 +++
 date = '2025-06-02'
 draft = false
-title = 'Embrace Container Orchestration with Podman'
+title = 'Setting Up a k3s Cluster on Three Raspberry Pi 5 Devices'
 +++
-
-# Setting Up a k3s Cluster on Three Raspberry Pi 5 Devices
 
 ## Prerequisites
 
